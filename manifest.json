@@ -2,8 +2,8 @@
   "name": "Numeric Grades",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Popmundo Numeric Grades",
+  "homepage_url": "https://github.com/behcet-li/numericgrades",
   "icons": {
     "16": "icons/icon16.png"
   },
