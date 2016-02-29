@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Popmundo Numeric Grades</title>
+  <style>
+    body {
+        padding: 1rem;
+        white-space: nowrap;
+    }
+    fieldset {
+        padding: 0.5rem 0;
+        border: none;
+    }
+    h1 { font-size: 1.2rem; }
+    #status {
+        visibility: hidden;
+    }
+    #status.display {
+        visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="status">
+    Options saved.
+  </div>
+
+<fieldset>
+    
+  <h1>Numeric Grades:</h1>
+  
+<fieldset>
+  <label>
+    <input type="checkbox" id="ng_active">
+    Enabled
+  </label>
+</fieldset>
+
+<fieldset>
+  <label>
+    Style:
+    <select id="ng_select">
+        <option value="grad">Gradient</option>
+        <option value="rain">Rainbow</option>
+    </select>
+  </label>
+</fieldset>
+
+</fieldset>
+
+<fieldset>
+    
+  <h1>Numeric Progress Bars:</h1>
+  
+  <label>
+    <input type="checkbox" id="pg_active">
+    Enabled
+  </label>
+
+</fieldset>
+  <hr>
+
+  <button id="save">Save</button>
+
+  <script src="/js/options.js"></script>
+</body>
+</html>
