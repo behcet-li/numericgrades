@@ -265,10 +265,11 @@ function initialize () {
         return;
       }
       toArray(record.addedNodes).forEach(function (node) {
+        // skipping text elements
         if (!node.tagName) {
           return;
         }
-        executeActive();
+        executeActive(node);
       });
     });
   });
