@@ -1,3 +1,4 @@
 #!/bin/bash
 
-zip -r src icons js _locales manifest.json
+rm release.zip
+zip -r release.zip src icons js _locales manifest.json
