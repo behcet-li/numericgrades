@@ -106,7 +106,8 @@ function cleanupProgressBars () {
     el.align = null;
     el.textContent = null;
   });
-  Array.prototype.slice.call(document.querySelectorAll('PPM2_Numeric_Grades_PM_Bar'))
+
+  Array.prototype.slice.call(document.querySelectorAll('.PPM2_Numeric_Grades_PM_Bar'))
   .forEach(function (el) { el.parentNode.removeChild(el); });
 }
 
