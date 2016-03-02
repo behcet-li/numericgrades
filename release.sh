@@ -13,4 +13,4 @@ cd gecko
 zip -r release_firefox.zip src icons js _locales manifest.json
 mv release_firefox.zip ../
 cd ..
-rm -rf gecko
+# rm -rf gecko

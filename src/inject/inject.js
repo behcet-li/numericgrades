@@ -90,7 +90,7 @@ function toArray (t) {
 
 // progress bars
 injectCSS('.PPM2_Numeric_Grades_PM_Bar { color: #000; line-height: 8px; font-size: 9px;' +
-  ' font-weight: normal; font-family: "Tahome, Geneva, sans-serif", display: inline; width: 0px; }');
+  ' font-weight: normal; font-family: "Tahoma, Geneva, sans-serif", display: inline; width: 0px; }');
 
 // numeric grades
 injectCSS('a.PPM2_Numeric_Grades + span { display: inline-block; margin-left: 5px; ' +
@@ -304,7 +304,9 @@ function executeActive (node, opts) {
   });
 }
 
-chrome.storage.sync.get(function (syncOpts) {
+var storage = chrome.storage.sync || chrome.storage.local;
+storage.get(function (syncOpts) {
   options = syncOpts;
   initialize();
 });
+

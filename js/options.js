@@ -3,6 +3,8 @@
 
 // chrome-extension:// {{ id }} /src/page_action/page_action.html
 
+var storage = chrome.storage.sync || chrome.storage.local;
+
 function save_options () {
   var options = {
     progressBars: {},
@@ -11,7 +13,7 @@ function save_options () {
   options.progressBars.active = document.getElementById('pg_active').checked;
   options.numericGrades.active = document.getElementById('ng_active').checked;
   options.numericGrades.selected = document.querySelector('#ng_select option:checked').value;
-  chrome.storage.sync.set(options, function () {
+  storage.set(options, function () {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.classList.add('display');
@@ -23,7 +25,7 @@ function save_options () {
 }
 
 function restore_options () {
-  chrome.storage.sync.get(function (options) {
+  storage.get(function (options) {
     document.getElementById('ng_select').value = options.numericGrades.selected;
     document.getElementById('ng_active').checked = options.numericGrades.active;
     document.getElementById('pg_active').checked = options.progressBars.active;

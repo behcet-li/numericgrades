@@ -7,12 +7,18 @@
   "icons": {
     "16": "icons/icon16.png"
   },
+  "applications": {
+    "gecko": {
+      "id": "numericgrades@dolm.us",
+      "strict_min_version": "45.0.0"
+    }
+  },
   "default_locale": "en",
   "background": {
     "scripts": [ "js/eventPage.js" ],
     "persistent": false
   },
-  "page_action": {
+  "browser_action": {
     "default_icon": "icons/icon16.png",
     "default_title": "Numeric Grades",
     "default_popup": "src/page_action/page_action.html"
@@ -23,7 +29,6 @@
   },
   "permissions": [
     "*://*.popmundo.com/*",
-    "declarativeContent",
     "storage"
   ],
   "content_scripts": [
