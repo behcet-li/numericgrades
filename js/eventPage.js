@@ -3,6 +3,7 @@
 
 var storage = chrome.storage.sync || chrome.storage.local;
 
+// Logic related to setting defaults on install or whatever
 var defaults = {
   numericGrades: {
     active: true,
@@ -13,10 +14,30 @@ var defaults = {
   }
 };
 
-chrome.runtime.onInstalled.addListener(function () {
-  storage.set(defaults);
-});
+// https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Chrome_incompatibilities
+if (chrome.runtime.onInstalled) {
+  chrome.runtime.onInstalled.addListener(function () {
+    setDefaults();
+  });
+}
+else {
+  // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/runtime is lies
+  //chrome.runtime.onStartup.addListener(function () {
+  //  setDefaults();
+  //});
+  setDefaults();
+}
 
+function setDefaults () {
+  storage.get(function (data) {
+    if (!data.numericGrades || !data.progressBars) {
+      storage.set(defaults);
+    }
+  });
+}
+
+
+// Logic related to publishing data to active popmundo tabs
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   // firefox only supports local storage ...
   //  if (namespace !== 'sync') {

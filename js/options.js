@@ -26,6 +26,7 @@ function save_options () {
 
 function restore_options () {
   storage.get(function (options) {
+    options = options || {};
     document.getElementById('ng_select').value = options.numericGrades.selected;
     document.getElementById('ng_active').checked = options.numericGrades.active;
     document.getElementById('pg_active').checked = options.progressBars.active;
