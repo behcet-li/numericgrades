@@ -42,6 +42,21 @@
       "js": [
         "src/inject/inject.js"
       ]
+    },
+    {
+      "matches": [
+        "https://popmundo.com/*",
+        "http://popmundo.com/*",
+        "https://*.popmundo.com/*",
+        "http://*.popmundo.com/*"
+      ],
+       "js": [
+         "lib/favico-0.3.10.min.js",
+         "src/inject/notifications.js"
+       ]
     }
-  ]
+	],
+	"web_accessible_resources": [
+    "/src/inject/menuNotifications.js"
+	]
 }
