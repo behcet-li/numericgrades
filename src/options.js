@@ -8,11 +8,13 @@ var storage = chrome.storage.sync || chrome.storage.local;
 function save_options () {
   var options = {
     progressBars: {},
-    numericGrades: {}
+    numericGrades: {},
+    titlebar: {}
   };
   options.progressBars.active = document.getElementById('pg_active').checked;
   options.numericGrades.active = document.getElementById('ng_active').checked;
   options.numericGrades.selected = document.querySelector('#ng_select option:checked').value;
+  options.titlebar.active = document.getElementById('tb_active').checked;
   storage.set(options, function () {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -30,6 +32,7 @@ function restore_options () {
     document.getElementById('ng_select').value = options.numericGrades.selected;
     document.getElementById('ng_active').checked = options.numericGrades.active;
     document.getElementById('pg_active').checked = options.progressBars.active;
+    document.getElementById('tb_active').checked = options.titlebar.active;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

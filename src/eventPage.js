@@ -11,6 +11,9 @@ var defaults = {
   },
   progressBars: {
     active: true
+  },
+  titlebar: {
+    active: true
   }
 };
 

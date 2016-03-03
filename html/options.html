@@ -1,68 +1,72 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Popmundo Numeric Grades</title>
-  <style>
+  <head>
+    <title>Popmundo Numeric Grades</title>
+    <style>
     body {
-        padding: 1rem;
-        white-space: nowrap;
+      padding: 0 1rem 0;
+      margin: 0 1rem 1rem;
+      white-space: nowrap;
     }
     fieldset {
-        padding: 0.5rem 0;
-        border: none;
+      padding: 0.5rem 0;
+      border: none;
     }
     h1 { font-size: 1.2rem; }
     #status {
-        visibility: hidden;
+      visibility: hidden;
     }
     #status.display {
-        visibility: visible;
+      visibility: visible;
     }
-  </style>
-</head>
+    </style>
+  </head>
 
-<body>
-  <div id="status">
-    Options saved.
-  </div>
+  <body>
+    <h1>Numeric Grades</h1>
+    <fieldset>
+      <h3>Numeric Grades:</h3>
+      <fieldset>
+        <label>
+          <input type="checkbox" id="ng_active">
+          Enabled
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          Style:
+          <select id="ng_select">
+            <option value="grad">Gradient</option>
+            <option value="rain">Rainbow</option>
+          </select>
+        </label>
+      </fieldset>
+    </fieldset>
 
-<fieldset>
-    
-  <h1>Numeric Grades:</h1>
-  
-<fieldset>
-  <label>
-    <input type="checkbox" id="ng_active">
-    Enabled
-  </label>
-</fieldset>
+    <fieldset>
+      <h3>Numeric Progress Bars:</h3>
+      <label>
+        <input type="checkbox" id="pg_active">
+        Enabled
+      </label>
+    </fieldset>
 
-<fieldset>
-  <label>
-    Style:
-    <select id="ng_select">
-        <option value="grad">Gradient</option>
-        <option value="rain">Rainbow</option>
-    </select>
-  </label>
-</fieldset>
+    <fieldset>
+      <h3>Titlebar Notifications</h3>
+      <label>
+        <input type="checkbox" id="tb_active">
+        Enabled
+      </label>
+    </fieldset>
 
-</fieldset>
+    <hr>
 
-<fieldset>
-    
-  <h1>Numeric Progress Bars:</h1>
-  
-  <label>
-    <input type="checkbox" id="pg_active">
-    Enabled
-  </label>
+    <button id="save">Save</button>
 
-</fieldset>
-  <hr>
+    <span id="status">
+      Options saved.
+    </span>
 
-  <button id="save">Save</button>
-
-  <script src="/src/options.js"></script>
-</body>
+    <script src="/src/options.js"></script>
+  </body>
 </html>

@@ -5,7 +5,7 @@
   "description": "Popmundo Numeric Grades",
   "homepage_url": "https://github.com/behcet-li/numericgrades",
   "icons": {
-    "16": "icons/icon16.png"
+    "64": "icons/pblue6464.png"
   },
   "applications": {
     "gecko": {
@@ -19,7 +19,7 @@
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "icons/icon16.png",
+    "default_icon": "icons/pblue6464.png",
     "default_title": "Numeric Grades",
     "default_popup": "html/options.html"
   },
@@ -40,22 +40,12 @@
         "http://*.popmundo.com/*"
       ],
       "js": [
-        "src/inject/numericGrades.js"
+        "src/inject/numericGrades.js",
+        "lib/favico-0.3.10.min.js",
+        "src/inject/notifications.js"
       ]
-    },
-    {
-      "matches": [
-        "https://popmundo.com/*",
-        "http://popmundo.com/*",
-        "https://*.popmundo.com/*",
-        "http://*.popmundo.com/*"
-      ],
-       "js": [
-         "lib/favico-0.3.10.min.js",
-         "src/inject/notifications.js"
-       ]
     }
-	],
+  ],
 	"web_accessible_resources": [
     "/src/inject/menuNotifications.js"
 	]
