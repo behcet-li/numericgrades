@@ -33,7 +33,9 @@ else {
 
 function setDefaults () {
   storage.get(function (data) {
-    if (!data.numericGrades || !data.progressBars) {
+    if (Object.keys(defaults).some(function (key) {
+       return !data[key];
+    })) {
       storage.set(defaults);
     }
   });
