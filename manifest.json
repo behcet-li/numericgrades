@@ -15,16 +15,16 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [ "js/eventPage.js" ],
+    "scripts": [ "src/eventPage.js" ],
     "persistent": false
   },
   "browser_action": {
     "default_icon": "icons/icon16.png",
     "default_title": "Numeric Grades",
-    "default_popup": "src/page_action/page_action.html"
+    "default_popup": "html/options.html"
   },
   "options_ui": {
-    "page": "/src/page_action/page_action.html",
+    "page": "html/options.html",
     "chrome_style": true
   },
   "permissions": [
@@ -40,7 +40,7 @@
         "http://*.popmundo.com/*"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject/numericGrades.js"
       ]
     },
     {
