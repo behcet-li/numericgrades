@@ -146,7 +146,7 @@ function progressBars (c) {
     a = b[i];
     if (1 > a.getElementsByClassName('PPM2_Numeric_Grades_PM_Bar').length) {
       e = document.createElement('div');
-      e.textContent = a.title.match(/(-*[\d]+%)/i)[1];
+      e.textContent = a.title.match(/(%{0,1}-*[\d]+%{0,1})/i)[1];
       e.className = 'PPM2_Numeric_Grades_PM_Bar';
       if (0 < a.getElementsByClassName('neg').length) {
         a.childNodes[0].firstChild.appendChild(e);
