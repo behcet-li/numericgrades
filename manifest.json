@@ -15,7 +15,11 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [ "src/eventPage.js" ],
+    "scripts": [
+      "lib/jquery-2.2.1.min.js",
+      "src/eventPage.js",
+      "src/notifications.js"
+    ],
     "persistent": false
   },
   "browser_action": {
@@ -29,7 +33,10 @@
   },
   "permissions": [
     "*://*.popmundo.com/*",
-    "storage"
+    "tabs",
+    "storage",
+    "notifications",
+    "alarms"
   ],
   "content_scripts": [
     {
@@ -46,7 +53,7 @@
       ]
     }
   ],
-	"web_accessible_resources": [
+  "web_accessible_resources": [
     "/src/inject/menuNotifications.js"
-	]
+  ]
 }

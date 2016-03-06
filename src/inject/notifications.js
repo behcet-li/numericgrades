@@ -45,11 +45,22 @@ function setBubble (num) {
   favicon.badge(num);
 }
 
+function sendNotifications (data) {
+  chrome.runtime.sendMessage({ notifications: data });
+}
+
 function initialize_notifications () {
   document.addEventListener('count', function (e) {
     var data = e.detail || {};
     var count = data.count;
     setBubble(count);
+  });
+
+  // pass notifications we intercepted in webpage to background page
+  document.addEventListener('notifications', function (e) {
+    var data = (e.detail || {}).res;
+    data = JSON.parse(data);
+    sendNotifications(data);
   });
 
   setTimeout(function () {
