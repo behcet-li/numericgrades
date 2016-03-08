@@ -96,6 +96,12 @@ injectCSS('.PPM2_Numeric_Grades_PM_Bar { color: #000; line-height: 8px; font-siz
 injectCSS('a.PPM2_Numeric_Grades + span { display: inline-block; margin-left: 5px; ' +
   'padding: 0 5px; border: 5px; font-weight: bold; border-radius: 10px; text-shadow: none; }');
 
+injectCSS('div.plusMinusBar div.neg div { padding: 2px 3px 0 2px }');
+
+injectCSS('div.progressBar div div, div.plusMinusBar div.pos div, ' +
+  'div.plusMinusBar div.zero div, div.blueProgressBar div div, ' + 
+  'div.greenProgressBar div div, div.redProgressBar div div { padding: 2px 0 0 3px }');
+
 function cleanupProgressBars () {
   Array.prototype.slice.call(document.querySelectorAll('.PPM2_Numeric_Grades_Bar'))
   .forEach(function (el) {
@@ -144,21 +150,31 @@ function progressBars (c) {
   b = c.getElementsByClassName('plusMinusBar');
   for (i = b.length; i-- ;) {
     a = b[i];
-    if (1 > a.getElementsByTagName('div').length) {
-      e = document.createElement('div');
-      e.textContent = a.title.match(/(%{0,1}-*[\d]+%{0,1})/i)[1];
-      e.className = 'PPM2_Numeric_Grades_PM_Bar';
-      if (0 < a.getElementsByClassName('neg').length) {
-        a.childNodes[0].firstChild.appendChild(e);
-        a.getElementsByClassName('posholder')[0].style.cssFloat = 'none';
-      }
-      else if (0 < a.getElementsByClassName('pos').length) {
-        a.childNodes[1].firstChild.appendChild(e);
-      }
-      else {
-        a.childNodes[1].firstChild.appendChild(e);
-        a.childNodes[1].firstChild.style.width = '0%';
-      }
+    // we've already scored this
+    if (a.getElementsByClassName('PPM2_Numeric_Grades_PM_Bar').length > 0) {
+      continue;
+    }
+    // some edge case with missing documentation :)
+    if (a.getElementsByTagName('div').length < 2) {
+      continue;
+    }
+    // Score is already displayed by jaws or etc
+    if (a.querySelectorAll('div > div > div > div').length > 0) {
+      continue;
+    }
+    e = document.createElement('div');
+    e.textContent = a.title.match(/(%{0,1}-*[\d]+%{0,1})/i)[1];
+    e.className = 'PPM2_Numeric_Grades_PM_Bar';
+    if (0 < a.getElementsByClassName('neg').length) {
+      a.childNodes[0].firstChild.appendChild(e);
+      a.getElementsByClassName('posholder')[0].style.cssFloat = 'none';
+    }
+    else if (0 < a.getElementsByClassName('pos').length) {
+      a.childNodes[1].firstChild.appendChild(e);
+    }
+    else {
+      a.childNodes[1].firstChild.appendChild(e);
+      a.childNodes[1].firstChild.style.width = '0%';
     }
   }
   return !0;
