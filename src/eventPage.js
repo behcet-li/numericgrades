@@ -82,8 +82,8 @@ else {
 function setDefaults () {
   storage.get(function (data) {
     storage.set(merge(defaults, data));
-  }
-});
+  });
+}
 
 
 // Logic related to publishing data to active popmundo tabs
