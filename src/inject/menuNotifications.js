@@ -11,10 +11,9 @@ if (window.updateNotificationCount) {
 
 if (window.showNotifications) {
   var originalShowNotifications = window.showNotifications;
-  window.showNotifications = sendNots;
-}
-function sendNots (res) {
-  var cEvent = new CustomEvent('notifications', { detail: { res: res } });
-  document.dispatchEvent(cEvent);
-  originalShowNotifications(res);
+  window.showNotifications = function (res) {
+    var cEvent = new CustomEvent('notifications', { detail: { res: res } });
+    document.dispatchEvent(cEvent);
+    originalShowNotifications(res);
+  }
 }

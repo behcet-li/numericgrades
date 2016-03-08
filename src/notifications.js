@@ -9,10 +9,10 @@ chrome.windows.onFocusChanged.addListener(function (window) {
   inFocus = (window === chrome.windows.WINDOW_ID_NONE ? false : true);
 });
 
-// store when last check ran, so we don't hammer their 'api'
+// store when last check ran, so we don't hammer their api
 var lastCheck = new Date().getTime();
 
-// storing UID's of seen notifications so that we don't notify them again
+// storing UID's of seen notifications so that we don't display them again
 var seenNotifications = [];
 function markAsRead (nots) {
   nots = Array.prototype.concat.call([], nots) || [];
@@ -59,7 +59,6 @@ function runNotificationsCheck (alarm) {
       return;
     }
     url = url[0];
-    console.log('url', url);
     // chrome is not in focus, get notifications
     if (inFocus === false) {
       return getNotifications(url);
@@ -79,7 +78,6 @@ function runNotificationsCheck (alarm) {
 }
 
 function getNotifications (domain) {
-  console.log('getting notifications from %s', domain);
   $.ajax({
     type: 'POST',
     contentType: 'application/json; charset=utf-8',
@@ -100,16 +98,16 @@ function getNotifications (domain) {
       markAsRead(messages);
       messages = messages.map(function (message) {
         return {
-          title: '',
           // yes thats a capital t
-          message: message.Text
+          title: message.Text,
+          message: ''
         };
       });
       chrome.notifications.create('ppm_ng', {
         type: 'list',
         iconUrl: '/icons/pblue6464.png',
         title: 'Popmundo',
-        message: 'You have unread events',
+        message: 'You have unread notifications',
         items: messages
       });
     }

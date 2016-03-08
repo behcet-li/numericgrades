@@ -58,6 +58,10 @@ var defaults = {
   },
   titlebar: {
     active: true
+  },
+  notifications: {
+    active: true,
+    interval: 10
   }
 };
 
