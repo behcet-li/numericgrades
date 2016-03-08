@@ -117,7 +117,7 @@ var options = {
 };
 
 function initialize_notifications () {
-  if (options.notifications.enabled) {
+  if (options.notifications.active) {
     chrome.alarms.create('checkNotifications', {
       periodInMinutes: options.notifications.interval
     });
@@ -145,3 +145,4 @@ storage.get(function (syncOpts) {
   options = syncOpts;
   initialize_notifications();
 });
+
