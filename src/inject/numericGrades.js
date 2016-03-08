@@ -144,7 +144,7 @@ function progressBars (c) {
   b = c.getElementsByClassName('plusMinusBar');
   for (i = b.length; i-- ;) {
     a = b[i];
-    if (1 > a.getElementsByClassName('PPM2_Numeric_Grades_PM_Bar').length) {
+    if (1 > a.getElementsByTagName('div').length) {
       e = document.createElement('div');
       e.textContent = a.title.match(/(%{0,1}-*[\d]+%{0,1})/i)[1];
       e.className = 'PPM2_Numeric_Grades_PM_Bar';
