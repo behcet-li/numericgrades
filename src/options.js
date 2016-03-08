@@ -20,7 +20,7 @@ function save_options () {
   options.numericGrades.selected = document.querySelector('#ng_select option:checked').value;
   options.titlebar.active = document.getElementById('tb_active').checked;
   options.notifications.active = document.getElementById('notifications_active').checked;
-  options.notifications.interval = document.getElementById('notificatons_interval').value;
+  options.notifications.interval = document.getElementById('notifications_interval').value;
   storage.set(options, function () {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
