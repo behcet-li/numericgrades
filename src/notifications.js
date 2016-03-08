@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, $ */
 'use strict';
 
 var ppmrgx = /^.*:\/\/[\d]+\.popmundo.com\//;
@@ -37,13 +37,11 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
   markAsRead(request.notifications);
 });
 
-// setting alarm to run periodically
-chrome.alarms.create('checkNotifications', { periodInMinutes: 1 });
-
-chrome.alarms.onAlarm.addListener(runNotificationsCheck);
-
 function runNotificationsCheck (alarm) {
   if (alarm.name !== 'checkNotifications') {
+    return;
+  }
+  if (!options.notifications.active) {
     return;
   }
   if ((new Date().getTime() - lastCheck) < 2000) {
@@ -113,3 +111,37 @@ function getNotifications (domain) {
     }
   });
 }
+
+var options = {
+  notifications: {}
+};
+
+function initialize_notifications () {
+  if (options.notifications.enabled) {
+    chrome.alarms.create('checkNotifications', {
+      periodInMinutes: options.notifications.interval
+    });
+
+    chrome.alarms.onAlarm.addListener(runNotificationsCheck);
+  }
+  else {
+    chrome.alarms.clear('checkNotifications');
+  }
+}
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  options = request;
+  Object.keys(request).forEach(function (option) {
+    switch (option) {
+      case 'notifications':
+        initialize_notifications();
+      break;
+    }
+  });
+});
+
+var storage = chrome.storage.sync || chrome.storage.local;
+storage.get(function (syncOpts) {
+  options = syncOpts;
+  initialize_notifications();
+});

@@ -47,9 +47,12 @@ function restore_options () {
 function validate_options () {
   var interval = document.getElementById('notifications_interval').value;
   var valid = interval.match(/^\d+$/);
+  if (valid) {
+    valid = (interval > 0 && interval < 31);
+  }
   document.getElementById('save').disabled = (valid ? false : true);
   return valid;
-};
+}
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);

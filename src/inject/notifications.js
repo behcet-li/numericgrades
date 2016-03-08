@@ -1,3 +1,4 @@
+/* global chrome, Favico */
 'use strict';
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -82,4 +83,3 @@ storage.get(function (syncOpts) {
   options = syncOpts;
   initialize_notifications();
 });
-
