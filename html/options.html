@@ -19,6 +19,16 @@
     #status.display {
       visibility: visible;
     }
+    input[type=text] {
+      width: 2.5rem;
+      text-align: right;
+    }
+    .error {
+      color: #DF2310;
+    }
+    .error.hidden {
+      display: none;
+    }
     </style>
   </head>
 
@@ -57,6 +67,22 @@
         <input type="checkbox" id="tb_active">
         Enabled
       </label>
+    </fieldset>
+
+    <fieldset>
+      <h3>System level notifications:</h3>
+      <fieldset>
+        <label>
+          <input type="checkbox" id="notifications_active">
+          Enabled
+      </fieldset>
+      <fieldset>
+        <label>
+          <input type="text" id="notifications_interval">
+          Check interval in minutes
+          <div class="error hidden">Enter only digits</div>
+        </label>
+      </fieldset>
     </fieldset>
 
     <hr>
