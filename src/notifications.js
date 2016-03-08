@@ -119,7 +119,7 @@ var options = {
 function initialize_notifications () {
   if (options.notifications.active) {
     chrome.alarms.create('checkNotifications', {
-      periodInMinutes: options.notifications.interval
+      periodInMinutes: parseInt(options.notifications.interval, 10)
     });
 
     chrome.alarms.onAlarm.addListener(runNotificationsCheck);
