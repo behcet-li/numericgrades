@@ -81,13 +81,9 @@ else {
 
 function setDefaults () {
   storage.get(function (data) {
-    if (Object.keys(defaults).some(function (key) {
-       return !data[key];
-    })) {
-      storage.set(merge(data, defaults));
-    }
-  });
-}
+    storage.set(merge(defaults, data));
+  }
+});
 
 
 // Logic related to publishing data to active popmundo tabs
