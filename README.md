@@ -1,0 +1,8 @@
+# numericgrades
+Popmundo Numeric Grades Chrome Extension
+
+
+# License
+THE NUMERICGRADES PROJECT IS NOT AFFILIATED WITH, SPONSORED BY, OR ENDORSED BY Spelkultur i Sverige AB.
+
+COPYRIGHT (C) 2016-present BEHCET UYAR. LICENSED UNDER THE MIT LICENSE.
