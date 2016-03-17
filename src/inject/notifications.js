@@ -46,8 +46,10 @@ function setBubble (num) {
   favicon.badge(num);
 }
 
-function sendNotifications (data) {
-  chrome.runtime.sendMessage({ notifications: data });
+function sendMessage (name, data) {
+  var message = {};
+  message[name] = data;
+  chrome.runtime.sendMessage(message);
 }
 
 function initialize_notifications () {
@@ -55,13 +57,14 @@ function initialize_notifications () {
     var data = e.detail || {};
     var count = data.count;
     setBubble(count);
+    sendMessage('count', data);
   });
 
   // pass notifications we intercepted in webpage to background page
   document.addEventListener('notifications', function (e) {
     var data = (e.detail || {}).res;
     data = JSON.parse(data);
-    sendNotifications(data);
+    sendMessage('notifications', data);
   });
 
   setTimeout(function () {

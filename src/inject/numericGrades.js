@@ -156,12 +156,10 @@ function progressBars (c) {
     }
     // some edge case with missing documentation :)
     if (a.getElementsByTagName('div').length < 2) {
-      console.log('edge')
       continue;
     }
     // Score is already displayed by jaws or etc
     if (a.querySelectorAll('.plusMinusBar > div > div > div').length > 0) {
-      console.log('div div div div')
       continue;
     }
     e = document.createElement('div');

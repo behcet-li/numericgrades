@@ -2,6 +2,12 @@
 'use strict';
 
 var ppmrgx = /^.*:\/\/[\d]+\.popmundo.com\//;
+// two minutes
+var minInterval = 2 * 60 * 1000;
+
+var options = {
+  notifications: {}
+};
 
 // keeping track of chrome's focus
 var inFocus = true;
@@ -28,25 +34,27 @@ function markAsRead (nots) {
   }
 }
 
-// receive user triggered notification items
+// receive user triggered notification items and count
 chrome.runtime.onMessage.addListener(function (request, sender) {
   if (!sender.tab || !sender.tab.url.match(ppmrgx)) {
     return;
   }
-  lastCheck = new Date().getTime();
-  markAsRead(request.notifications);
+  if (request.notifications) {
+    markAsRead(request.notifications);
+  }
+  if (request.count) {
+    runNotificationsCheck();
+  }
 });
 
-function runNotificationsCheck (alarm) {
-  if (alarm.name !== 'checkNotifications') {
+function runNotificationsCheck () {
+  if (!options || !options.notifications || !options.notifications.active) {
     return;
   }
-  if (!options.notifications.active) {
+  if ((new Date().getTime() - lastCheck) < minInterval) {
     return;
   }
-  if ((new Date().getTime() - lastCheck) < 2000) {
-    return;
-  }
+  lastCheck = new Date().getTime();
   chrome.tabs.query({ url: '*://*.popmundo.com/*' }, function (tabs) {
     tabs = tabs || [];
     if (tabs.length < 1) {
@@ -112,37 +120,17 @@ function getNotifications (domain) {
   });
 }
 
-var options = {
-  notifications: {}
-};
-
-function initialize_notifications () {
-  if (options.notifications.active) {
-    chrome.alarms.create('checkNotifications', {
-      periodInMinutes: parseInt(options.notifications.interval, 10)
-    });
-
-    chrome.alarms.onAlarm.addListener(runNotificationsCheck);
-  }
-  else {
-    chrome.alarms.clear('checkNotifications');
-  }
-}
-
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  options = request;
-  Object.keys(request).forEach(function (option) {
-    switch (option) {
-      case 'notifications':
-        initialize_notifications();
-      break;
-    }
-  });
+  if (sender.tab) {
+    return;
+  }
+  if (request.notifications) {
+    options = request;
+  }
 });
 
 var storage = chrome.storage.sync || chrome.storage.local;
 storage.get(function (syncOpts) {
   options = syncOpts;
-  initialize_notifications();
 });
 

@@ -20,7 +20,6 @@ function save_options () {
   options.numericGrades.selected = document.querySelector('#ng_select option:checked').value;
   options.titlebar.active = document.getElementById('tb_active').checked;
   options.notifications.active = document.getElementById('notifications_active').checked;
-  options.notifications.interval = document.getElementById('notifications_interval').value;
   storage.set(options, function () {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -40,27 +39,13 @@ function restore_options () {
     document.getElementById('pg_active').checked = options.progressBars.active;
     document.getElementById('tb_active').checked = options.titlebar.active;
     document.getElementById('notifications_active').checked = options.notifications.active;
-    document.getElementById('notifications_interval').value = options.notifications.interval;
   });
 }
 
 function validate_options () {
-  var interval = document.getElementById('notifications_interval').value;
-  var valid = interval.match(/^\d+$/);
-  if (valid) {
-    valid = (interval > 0 && interval < 31);
-  }
-  document.getElementById('save').disabled = (valid ? false : true);
+  var valid = true;
   return valid;
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
-document.getElementById('notifications_interval').addEventListener('input', function () {
-  if (!validate_options()) {
-    return document.querySelector('#notifications_interval + .error')
-      .classList.remove('hidden');
-  }
-  return document.querySelector('#notifications_interval + .error')
-    .classList.add('hidden');
-}, false);
