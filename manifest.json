@@ -1,6 +1,6 @@
 {
   "name": "Numeric Grades",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "manifest_version": 2,
   "description": "Popmundo Numeric Grades",
   "homepage_url": "https://github.com/behcet-li/numericgrades",
@@ -20,7 +20,7 @@
       "src/eventPage.js",
       "src/notifications.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "browser_action": {
     "default_icon": "icons/pblue6464.png",
