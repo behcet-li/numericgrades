@@ -17,8 +17,8 @@
   "background": {
     "scripts": [
       "lib/jquery-2.2.1.min.js",
-      "src/eventPage.js",
-      "src/notifications.js"
+      "src/background/eventPage.js",
+      "src/background/notifications.js"
     ],
     "persistent": true
   },
@@ -46,9 +46,9 @@
         "http://*.popmundo.com/*"
       ],
       "js": [
-        "src/inject/numericGrades.js",
+        "src/content/numericGrades.js",
         "lib/favico-0.3.10.min.js",
-        "src/inject/notifications.js"
+        "src/content/notifications.js"
       ]
     }
   ],
