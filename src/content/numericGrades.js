@@ -99,7 +99,7 @@ injectCSS('a.PPM2_Numeric_Grades + span { display: inline-block; margin-left: 5p
 injectCSS('div.plusMinusBar div.neg div { padding: 2px 3px 0 2px }');
 
 injectCSS('div.progressBar div div, div.plusMinusBar div.pos div, ' +
-  'div.plusMinusBar div.zero div, div.blueProgressBar div div, ' + 
+  'div.plusMinusBar div.zero div, div.blueProgressBar div div, ' +
   'div.greenProgressBar div div, div.redProgressBar div div { padding: 2px 0 0 3px }');
 
 function cleanupProgressBars () {
@@ -118,7 +118,7 @@ function cleanupProgressBars () {
 }
 
 function progressBars (c) {
-  c = c || document.getElementById('wrapper');
+  c = c || document.getElementById('ppm-wrapper') || document.querySelector('div.content');
   if (!c || !c.tagName || c.tagName == 'BODY') {
     return;
   }
