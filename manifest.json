@@ -5,7 +5,8 @@
   "description": "Popmundo Numeric Grades",
   "homepage_url": "https://github.com/behcet-li/numericgrades",
   "icons": {
-    "64": "icons/pblue6464.png"
+    "64": "icons/red-64.png",
+    "128": "icons/red-128.png"
   },
   "applications": {
     "gecko": {
@@ -23,7 +24,7 @@
     "persistent": true
   },
   "browser_action": {
-    "default_icon": "icons/pblue6464.png",
+    "default_icon": "icons/red-128-borderless.png",
     "default_title": "Numeric Grades",
     "default_popup": "html/options.html"
   },
