@@ -15,6 +15,15 @@ chrome.windows.onFocusChanged.addListener(function (window) {
   inFocus = (window === chrome.windows.WINDOW_ID_NONE ? false : true);
 });
 
+// keeping track of last active ppm tab
+var activeTab;
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if (!tab.url.match(ppmrgx) || tab.active !== true) {
+    return;
+  }
+  activeTab = tab;
+});
+
 // store when last check ran, so we don't hammer their api
 var lastCheck = new Date().getTime();
 
@@ -109,15 +118,40 @@ function getNotifications (domain) {
           message: ''
         };
       });
-      chrome.notifications.create('ppm_ng', {
-        type: 'list',
-        iconUrl: '/icons/pblue6464.png',
-        title: 'Popmundo',
-        message: 'You have unread notifications',
-        items: messages
-      });
+      var title = messages.pop().title;
+      var notificationOptions = {
+        type: 'basic',
+        iconUrl: '/icons/red-128.png',
+        title: title,
+        message: ''
+      }
+      if (messages.length > 0) {
+        notificationOptions.type = 'list';
+        notificationOptions.items = messages;
+      }
+      chrome.notifications.create('ppm_ng', notificationOptions);
     }
   });
+}
+
+chrome.notifications.onClicked.addListener(function (id) {
+  chrome.notifications.clear(id);
+  if (activeTab) {
+    return focusTab(activeTab);
+  }
+  chrome.tabs.query({
+    url: '*://*.popmundo.com/*'
+  }, function (tabs) {
+    focusTab(tabs.pop());
+  });
+});
+
+function focusTab (tab) {
+  if (!tab) {
+    return;
+  }
+  chrome.tabs.update(tab.id, { active: true });
+  chrome.windows.update(tab.windowId, { focused: true });
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
