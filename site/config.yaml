@@ -6,6 +6,7 @@ title: "Numeric Grades"
 languageCode: "en-us"
 theme: "hyde-x"
 canonifyURLs: true
+relativeURLs: true
 disableSitemap: true
 contentdir: "content"
 layoutdir: "layout"
