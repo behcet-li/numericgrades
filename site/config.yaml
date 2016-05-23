@@ -1,7 +1,7 @@
 ---
 MetaDataFormat: "yaml"
 license: "MIT"
-BaseURL: "http://behcet-li.github.com/numericgrades"
+BaseURL: "https://behcet-li.github.com/numericgrades"
 title: "Numeric Grades"
 languageCode: "en-us"
 theme: "hyde-x"
@@ -27,6 +27,6 @@ params:
   home: "Home"
   tagline: "for [Popmundo](http://www.popmundo.com)"
   googleAnalytics: "UA-74404787-2"
-  github: "http://github.com/behcet-li/numericgrades"
+  github: "https://github.com/behcet-li/numericgrades"
   rss: false
 
