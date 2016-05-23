@@ -1,0 +1,33 @@
+---
+MetaDataFormat: "yaml"
+license: "MIT"
+BaseURL: "https://behcet-li.github.com/numericgrades"
+title: "Numeric Grades"
+languageCode: "en-us"
+theme: "hyde-x"
+canonifyURLs: true
+relativeURLs: true
+disableSitemap: true
+contentdir: "content"
+layoutdir: "layout"
+publishdir: "public"
+disableRSS: true
+googleAnalytics: "UA-74404787-2"
+
+
+permalinks:
+  post: /:slug/
+
+author:
+  name: "Numeric Grades"
+
+params:
+  truncate: false
+  hideReadingTime: true
+  theme: "theme-base-0d"
+  home: "Home"
+  tagline: "for [Popmundo](http://www.popmundo.com)"
+  googleAnalytics: "UA-74404787-2"
+  github: "https://github.com/behcet-li/numericgrades"
+  rss: false
+
