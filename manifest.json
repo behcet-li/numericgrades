@@ -1,6 +1,6 @@
 {
   "name": "Numeric Grades",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "manifest_version": 2,
   "description": "Popmundo Numeric Grades",
   "homepage_url": "https://github.com/behcet-li/numericgrades",
@@ -18,7 +18,7 @@
   "background": {
     "scripts": [
       "lib/jquery-2.2.1.min.js",
-      "src/background/eventPage.js",
+      "src/background/options.js",
       "src/background/notifications.js"
     ],
     "persistent": true

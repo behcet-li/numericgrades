@@ -167,4 +167,3 @@ var storage = chrome.storage.sync || chrome.storage.local;
 storage.get(function (syncOpts) {
   options = syncOpts;
 });
-
