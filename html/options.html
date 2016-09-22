@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Popmundo Numeric Grades</title>
-    <style>
+<head>
+  <title>Popmundo Numeric Grades</title>
+  <style>
     body {
       padding: 0 1rem 0;
       margin: 0 1rem 1rem;
@@ -11,6 +11,9 @@
     fieldset {
       padding: 0.5rem 0;
       border: none;
+    }
+    fieldset > fieldset:last-of-type {
+      padding-bottom: 0;
     }
     h1 { font-size: 1.2rem; }
     #status {
@@ -29,34 +32,37 @@
     .error.hidden {
       display: none;
     }
-    </style>
-  </head>
+  </style>
+</head>
 
-  <body>
-    <h1>Numeric Grades</h1>
+<body>
+  <script id="template" type="text/ractive">
+    <h1>{{ local('extName') }}</h1>
     <fieldset>
       <h3>Numeric Grades:</h3>
       <fieldset>
         <label>
-          <input type="checkbox" id="ng_active">
+          <input type="checkbox" checked="{{options.numericGrades.active}}">
           Enabled
         </label>
       </fieldset>
+      {{#options.numericGrades.active}}
       <fieldset>
         <label>
           Style:
-          <select id="ng_select">
+          <select value="{{options.numericGrades.selected}}">
             <option value="grad">Gradient</option>
             <option value="rain">Rainbow</option>
           </select>
         </label>
       </fieldset>
+      {{/}}
     </fieldset>
 
     <fieldset>
       <h3>Numeric Progress Bars:</h3>
       <label>
-        <input type="checkbox" id="pg_active">
+        <input type="checkbox" checked="{{options.progressBars.active}}">
         Enabled
       </label>
     </fieldset>
@@ -64,7 +70,7 @@
     <fieldset>
       <h3>Titlebar Notifications:</h3>
       <label>
-        <input type="checkbox" id="tb_active">
+        <input type="checkbox" checked="{{options.titlebar.active}}">
         Enabled
       </label>
     </fieldset>
@@ -72,18 +78,19 @@
     <fieldset>
       <h3>Desktop notifications:</h3>
       <label>
-        <input type="checkbox" id="notifications_active">
+        <input type="checkbox" checked={{options.notifications.active}}>
         Enabled
+      </label>
     </fieldset>
 
     <hr>
 
-    <button id="save">Save</button>
+    <button on-click="byebye">Close</button>
+  </script>
 
-    <span id="status">
-      Options saved.
-    </span>
+  <div id="container"></div>
 
-    <script src="/src/options/index.js"></script>
-  </body>
+  <script src="/lib/ractive.0.7.3.js"></script>
+  <script src="/src/options/index.js"></script>
+</body>
 </html>

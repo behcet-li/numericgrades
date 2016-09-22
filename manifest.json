@@ -1,6 +1,6 @@
 {
   "name": "Numeric Grades",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "manifest_version": 2,
   "description": "Popmundo Numeric Grades",
   "homepage_url": "https://github.com/behcet-li/numericgrades",
@@ -55,5 +55,6 @@
   ],
   "web_accessible_resources": [
     "/src/inject/menuNotifications.js"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

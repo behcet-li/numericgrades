@@ -3,49 +3,111 @@
 
 // chrome-extension:// {{ id }} /html/options.html
 
-var storage = chrome.storage.sync || chrome.storage.local;
+function merge (target, src) {
+  var array = Array.isArray(src);
+  var dst = array && [] || {};
 
-function save_options () {
-  if (!validate_options()) {
-    return;
+  if (array) {
+    target = target || [];
+    dst = dst.concat(target);
+    src.forEach(function (e, i) {
+      if (typeof dst[i] === 'undefined') {
+        dst[i] = e;
+      }
+      else if (typeof e === 'object') {
+        dst[i] = merge(target[i], e);
+      }
+      else {
+        if (target.indexOf(e) === -1) {
+          dst.push(e);
+        }
+      }
+    });
   }
-  var options = {
-    progressBars: {},
-    numericGrades: {},
-    titlebar: {},
-    notifications: {}
-  };
-  options.progressBars.active = document.getElementById('pg_active').checked;
-  options.numericGrades.active = document.getElementById('ng_active').checked;
-  options.numericGrades.selected = document.querySelector('#ng_select option:checked').value;
-  options.titlebar.active = document.getElementById('tb_active').checked;
-  options.notifications.active = document.getElementById('notifications_active').checked;
-  storage.set(options, function () {
-    // Update status to let user know options were saved.
-    var status = document.getElementById('status');
-    status.classList.add('display');
-    setTimeout(function () {
-      status.classList.remove('display');
-      window.close();
-    }, 750);
-  });
+  else {
+    if (target && typeof target === 'object') {
+      Object.keys(target).forEach(function (key) {
+        dst[key] = target[key];
+      });
+    }
+    Object.keys(src).forEach(function (key) {
+      if (typeof src[key] !== 'object' || !src[key]) {
+        dst[key] = src[key];
+      }
+      else {
+        if (!target[key]) {
+          dst[key] = src[key];
+        }
+        else {
+          dst[key] = merge(target[key], src[key]);
+        }
+      }
+    });
+  }
+  return dst;
 }
 
-function restore_options () {
+var storage = chrome.storage.sync || chrome.storage.local;
+var defaults = {
+  progressBars: {
+    active: true
+  },
+  numericGrades: {
+    active: true,
+    selected: 'grad'
+  },
+  titlebar: {
+    active: true
+  },
+  notifications: {
+    active: true
+  }
+};
+var ractive;
+
+function setOptions (options) {
+  if (!validateOptions()) {
+    return false;
+  }
+  storage.set(merge(defaults, options || {}), function () {});
+}
+
+function getOptions (callback) {
+  callback = callback || function () {};
   storage.get(function (options) {
-    options = options || {};
-    document.getElementById('ng_select').value = options.numericGrades.selected;
-    document.getElementById('ng_active').checked = options.numericGrades.active;
-    document.getElementById('pg_active').checked = options.progressBars.active;
-    document.getElementById('tb_active').checked = options.titlebar.active;
-    document.getElementById('notifications_active').checked = options.notifications.active;
+    callback(merge(defaults, options || {}));
   });
 }
 
-function validate_options () {
+function setup () {
+  getOptions(function (options) {
+    ractive = new Ractive({
+      el: '#container',
+      template: '#template',
+      data: {
+        local: chrome.i18n.getMessage,
+        options: options
+      }
+    });
+    ractive.observe('options', setOptions);
+    ractive.on('byebye', teardown);
+  });
+}
+
+function teardown () {
+  if (ractive && ractive.teardown) {
+    ractive
+    .teardown()
+    .then(window.close)
+    .catch(window.close);
+  }
+  setTimeout(window.close, 750);
+}
+
+// TODO: validation
+function validateOptions () {
   var valid = true;
   return valid;
 }
 
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
+document.addEventListener('DOMContentLoaded', setup);
