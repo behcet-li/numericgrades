@@ -3,29 +3,35 @@
     "message": "Numeric Grades",
     "description": "Name of the app"
   },
-  "l10nSecondParagraph": {
-    "message":"If you need more complex localization, you can also define <strong>data-l10n-args</strong>.  This should contain <span class='code'>$containerType$</span> filled with <span class='code'>$dataType$</span>, which will be passed into Chrome's i18n API as <span class='code'>$functionArgs$</span>.  In fact, this paragraph does just that, and wraps the args in mono-space font.  Easy!"
-    ,"description":"introduce the data-l10n-args attribute.  End on a lame note."
-    ,"placeholders": {
-      "containerType": {
-        "content":"$1"
-        ,"example":"'array', 'list', or something similar"
-        ,"description":"type of the args container"
-      }
-      ,"dataType": {
-        "content":"$2"
-        ,"example":"string"
-        ,"description":"type of data in each array index"
-      }
-      ,"functionArgs": {
-        "content":"$3"
-        ,"example":"arguments"
-        ,"description":"whatever you call what you pass into a function/method.  args, params, etc."
-      }
-    }
-  }
-  ,"l10nThirdParagraph": {
-    "message":"Message contents are passed right into innerHTML without processing - include any tags (or even scripts) that you feel like.  If you have an input field, the placeholder will be set instead, and buttons will have the value attribute set."
-    ,"description":"inform that we handle placeholders, buttons, and direct HTML input"
+  "extDescription": {
+    "message": "Popmundo Numeric Grades",
+    "description": "Description of the application"
+  },
+  "options_enabled": {
+    "message": "Enabled"
+  },
+  "options_numeric_grades_title": {
+    "message": "Numeric Grades"
+  },
+  "options_numeric_grades_style": {
+    "message": "Style"
+  },
+  "options_numeric_grades_gradient": {
+    "message": "Gradient"
+  },
+  "options_numeric_grades_rainbow": {
+    "message": "Rainbow"
+  },
+  "options_progressbars_title": {
+    "message": "Numeric Progress Bars"
+  },
+  "options_titlebar_title": {
+    "message": "Titlebar Notifications"
+  },
+  "options_notifications_title": {
+    "message": "Desktop Notifications"
+  },
+  "options_close": {
+    "message": "Close"
   }
 }

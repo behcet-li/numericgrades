@@ -1,1 +1,37 @@
-{}
+{
+  "extName": {
+    "message": "Numeric Grades",
+    "description": "Name of the app"
+  },
+  "extDescription": {
+    "message": "Popmundo Numeric Grades",
+    "description": "Description of the application"
+  },
+  "options_enabled": {
+    "message": "Aktif"
+  },
+  "options_numeric_grades_title": {
+    "message": "Numeric Grades"
+  },
+  "options_numeric_grades_style": {
+    "message": "Style"
+  },
+  "options_numeric_grades_gradient": {
+    "message": "Gradient"
+  },
+  "options_numeric_grades_rainbow": {
+    "message": "Rainbow"
+  },
+  "options_progressbars_title": {
+    "message": "Numeric Progress Bars"
+  },
+  "options_titlebar_title": {
+    "message": "Titlebar Notifications"
+  },
+  "options_notifications_title": {
+    "message": "Desktop Notifications"
+  },
+  "options_close": {
+    "message": "Kapat"
+  }
+}
