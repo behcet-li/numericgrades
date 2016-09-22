@@ -11,7 +11,8 @@
   "applications": {
     "gecko": {
       "id": "numericgrades@dolm.us",
-      "strict_min_version": "45.0.0"
+      "strict_min_version": "48.0a1",
+      "strict_max_version": "52.0"
     }
   },
   "default_locale": "en",
