@@ -1,3 +1,4 @@
+/* global window, CustomEvent, document */
 'use strict';
 
 if (window.updateNotificationCount) {
@@ -15,5 +16,5 @@ if (window.showNotifications) {
     var cEvent = new CustomEvent('notifications', { detail: { res: res } });
     document.dispatchEvent(cEvent);
     originalShowNotifications(res);
-  }
+  };
 }

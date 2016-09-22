@@ -1,4 +1,4 @@
-/* global chrome, Favico */
+/* global chrome, Favico, document */
 'use strict';
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {

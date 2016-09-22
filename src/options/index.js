@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, Ractive, window, document */
 'use strict';
 
 // chrome-extension:// {{ id }} /html/options.html
