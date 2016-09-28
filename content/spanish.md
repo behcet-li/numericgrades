@@ -1,5 +1,5 @@
 ---
-title: "Numeric Grades (Espanol)"
+title: "Espanol"
 name: "Spanish"
 slug: "espanol"
 menu: "main"
