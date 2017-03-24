@@ -5,8 +5,8 @@ var fs = require('fs');
 var manifest = fs.readFileSync('./manifest.json', 'utf-8');
 manifest = JSON.parse(manifest);
 delete manifest.background.persistent;
+delete manifest.content_security_policy;
 
 var out = JSON.stringify(manifest, null, '  ');
 
 fs.writeFileSync('./manifest.json', out);
-

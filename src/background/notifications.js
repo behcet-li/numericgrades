@@ -122,8 +122,8 @@ function getNotifications (domain) {
       var notificationOptions = {
         type: 'basic',
         iconUrl: '/icons/red-128.png',
-        title: title,
-        message: ''
+        title: '',
+        message: title
       };
       if (messages.length > 0) {
         notificationOptions.type = 'list';

@@ -1,6 +1,6 @@
 {
   "name": "__MSG_extName__",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "manifest_version": 2,
   "description": "__MSG_extDescription__",
   "homepage_url": "https://github.com/behcet-li/numericgrades",
@@ -12,7 +12,7 @@
     "gecko": {
       "id": "numericgrades@dolm.us",
       "strict_min_version": "48.0a1",
-      "strict_max_version": "52.0"
+      "strict_max_version": "53.0"
     }
   },
   "default_locale": "en",
