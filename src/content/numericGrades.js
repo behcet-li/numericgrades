@@ -90,17 +90,20 @@ function toArray (t) {
 
 // progress bars
 injectCSS('.PPM2_Numeric_Grades_PM_Bar { color: #000; line-height: 8px; font-size: 9px;' +
-  ' font-weight: normal; font-family: "Tahoma, Geneva, sans-serif", display: inline; width: 0px; }');
+  ' font-weight: normal; font-family: "Tahoma, Geneva, sans-serif", display: inline; width: 0px; }' +
 
 // numeric grades
-injectCSS('a.PPM2_Numeric_Grades + span { display: inline-block; margin-left: 5px; ' +
-  'padding: 0 5px; border: 5px; font-weight: bold; border-radius: 10px; text-shadow: none; }');
+  'a.PPM2_Numeric_Grades + span { display: inline-block; margin-left: 5px; ' +
+  'padding: 0 5px; border: 5px; font-weight: bold; border-radius: 10px; text-shadow: none; }' +
 
-injectCSS('div.plusMinusBar div.neg div { padding: 2px 3px 0 2px }');
+  'div.plusMinusBar { overflow-wrap: normal; }' +
+  'div.plusMinusBar div.neg div { padding: 2px 3px 0 2px }' +
 
-injectCSS('div.progressBar div div, div.plusMinusBar div.pos div, ' +
+  'div.progressBar div div, div.plusMinusBar div.pos div, ' +
   'div.plusMinusBar div.zero div, div.blueProgressBar div div, ' +
-  'div.greenProgressBar div div, div.redProgressBar div div { padding: 2px 0 0 3px }');
+  'div.greenProgressBar div div, div.redProgressBar div div { padding: 2px 0 0 3px }' +
+
+  'div.PPM2_Numeric_Grades_Bar { overflow-wrap: normal }');
 
 function cleanupProgressBars () {
   Array.prototype.slice.call(document.querySelectorAll('.PPM2_Numeric_Grades_Bar'))
