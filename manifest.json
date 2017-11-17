@@ -1,6 +1,6 @@
 {
   "name": "__MSG_extName__",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "manifest_version": 2,
   "description": "__MSG_extDescription__",
   "homepage_url": "https://popmun.do",
@@ -56,5 +56,5 @@
   "web_accessible_resources": [
     "/src/inject/menuNotifications.js"
   ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }
