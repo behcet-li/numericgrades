@@ -36,65 +36,10 @@
 </head>
 
 <body>
-  <script id="template" type="text/ractive">
-    <h1>{{ local('extName') }}</h1>
-    <fieldset>
-      <h3>{{ local('options_numeric_grades_title') }}:</h3>
-      <fieldset>
-        <label>
-          <input type="checkbox" checked="{{options.numericGrades.active}}">
-          {{ local('options_enabled') }}
-        </label>
-      </fieldset>
-      {{#options.numericGrades.active}}
-      <fieldset>
-        <label>
-          {{ local('options_numeric_grades_style') }}:
-          <select value="{{options.numericGrades.selected}}">
-            <option value="grad">
-              {{ local('options_numeric_grades_gradient') }}
-            </option>
-            <option value="rain">
-              {{ local('options_numeric_grades_rainbow') }}
-            </option>
-          </select>
-        </label>
-      </fieldset>
-      {{/}}
-    </fieldset>
-
-    <fieldset>
-      <h3>{{ local('options_progressbars_title') }}:</h3>
-      <label>
-        <input type="checkbox" checked="{{options.progressBars.active}}">
-        {{ local('options_enabled') }}
-      </label>
-    </fieldset>
-
-    <fieldset>
-      <h3>{{ local('options_titlebar_title') }}:</h3>
-      <label>
-        <input type="checkbox" checked="{{options.titlebar.active}}">
-        {{ local('options_enabled') }}
-      </label>
-    </fieldset>
-
-    <fieldset>
-      <h3>{{ local('options_notifications_title') }}:</h3>
-      <label>
-        <input type="checkbox" checked={{options.notifications.active}}>
-        {{ local('options_enabled') }}
-      </label>
-    </fieldset>
-
-    <hr>
-
-    <button on-click="byebye">{{ local('options_close') }}</button>
-  </script>
-
   <div id="container"></div>
 
-  <script src="/lib/ractive.0.7.3.js"></script>
+  <script src="/src/templates/templates_compiled.js"></script>
+  <script src="/lib/ractive.0.7.3.runtime.js"></script>
   <script src="/src/options/index.js"></script>
 </body>
 </html>

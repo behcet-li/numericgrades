@@ -1,4 +1,4 @@
-/* global chrome, Ractive, window, document */
+/* global chrome, Ractive, window, document, Templates */
 'use strict';
 
 // chrome-extension:// {{ id }} /html/options.html
@@ -83,7 +83,7 @@ function setup () {
   getOptions(function (options) {
     ractive = new Ractive({
       el: '#container',
-      template: '#template',
+      template: Templates.options,
       data: {
         local: chrome.i18n.getMessage,
         options: options
