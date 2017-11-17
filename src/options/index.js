@@ -1,4 +1,4 @@
-/* global chrome, Ractive, window, document */
+/* global chrome, Ractive, window, document, Templates */
 'use strict';
 
 // chrome-extension:// {{ id }} /html/options.html
@@ -63,6 +63,22 @@ var defaults = {
     active: true
   }
 };
+
+var languageKeys = {
+  'extName': '',
+  'extDescription': '',
+  'options_enabled': '',
+  'options_numeric_grades_title': '',
+  'options_numeric_grades_style': '',
+  'options_numeric_grades_gradient': '',
+  'options_numeric_grades_rainbow': '',
+  'options_progressbars_title': '',
+  'options_titlebar_title': '',
+  'options_notifications_title': '',
+  'options_close': ''
+};
+
+Ractive.DEBUG = false;
 var ractive;
 
 function setOptions (options) {
@@ -80,12 +96,24 @@ function getOptions (callback) {
 }
 
 function setup () {
+  // This was done by calling `chrome.i18n.getMessage` on template BUT
+  // Firefox do not honor CSP defined on manifest.json and thus blocking all
+  // `new Function()` executions that are essential to any templating engine
+  // when using expressions.
+  // We don't have too many translation string so we can get away with
+  // hardcoding key names defined in locale files and providing template
+  // engines with a JSON object instead of forcing it to make function calls
+  var localeMessages = {};
+  Object.keys(languageKeys)
+    .forEach(key => {
+      localeMessages[key] = chrome.i18n.getMessage(key);
+    });
   getOptions(function (options) {
     ractive = new Ractive({
       el: '#container',
-      template: '#template',
+      template: Templates.options,
       data: {
-        local: chrome.i18n.getMessage,
+        local: localeMessages,
         options: options
       }
     });

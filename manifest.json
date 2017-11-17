@@ -1,6 +1,6 @@
 {
   "name": "__MSG_extName__",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "manifest_version": 2,
   "description": "__MSG_extDescription__",
   "homepage_url": "https://popmun.do",
@@ -49,7 +49,8 @@
       "js": [
         "src/content/numericGrades.js",
         "lib/favico-0.3.10.min.js",
-        "src/content/notifications.js"
+        "src/content/notifications.js",
+        "lib/ractive.0.9.10.runtime.js"
       ]
     }
   ],
