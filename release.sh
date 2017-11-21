@@ -4,7 +4,7 @@ set -ex
 
 RELEASE_DIRS="_locales html icons lib src manifest.json"
 
-rm release*.zip
+rm release*.zip || true
 
 # chrome
 zip -r release_chrome.zip $RELEASE_DIRS
