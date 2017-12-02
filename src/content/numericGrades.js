@@ -16,10 +16,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     switch (option) {
       case 'numericGrades':
         cleanupNumericGrades();
-      break;
+        break;
       case 'progressBars':
         cleanupProgressBars();
-      break;
+        break;
     }
   });
   setTimeout(function () {
@@ -39,18 +39,15 @@ function merge (target, src) {
     src.forEach(function (e, i) {
       if (typeof dst[i] === 'undefined') {
         dst[i] = e;
-      }
-      else if (typeof e === 'object') {
+      } else if (typeof e === 'object') {
         dst[i] = merge(target[i], e);
-      }
-      else {
+      } else {
         if (target.indexOf(e) === -1) {
           dst.push(e);
         }
       }
     });
-  }
-  else {
+  } else {
     if (target && typeof target === 'object') {
       Object.keys(target).forEach(function (key) {
         dst[key] = target[key];
@@ -59,12 +56,10 @@ function merge (target, src) {
     Object.keys(src).forEach(function (key) {
       if (typeof src[key] !== 'object' || !src[key]) {
         dst[key] = src[key];
-      }
-      else {
+      } else {
         if (!target[key]) {
           dst[key] = src[key];
-        }
-        else {
+        } else {
           dst[key] = merge(target[key], src[key]);
         }
       }
@@ -122,36 +117,35 @@ function cleanupProgressBars () {
 
 function progressBars (c) {
   c = c || document.getElementById('ppm-wrapper') || document.querySelector('div.content');
-  if (!c || !c.tagName || c.tagName == 'BODY') {
+  if (!c || !c.tagName || c.tagName === 'BODY') {
     return;
   }
   var a, b, d, e, i;
   if (c.classList && c.classList.contains('progressBar')) {
     b = toArray([ c ]);
-  }
-  else {
+  } else {
     b = c.querySelectorAll('.blueProgressBar, .greenProgressBar, .progressBar');
   }
-  for (i = b.length; i-- ;) {
-    a = b[i],
+  for (i = b.length; i--;) {
+    a = b[i];
     d = a.firstChild;
-    e = !0 == /(%{0,1}[\d]+%{0,1})/i.test(a.title) ? a.title.match(/(%{0,1}[\d]+%{0,1})/i)[1] : a.title,
-    (d && d.style) ? (
-        d.textContent = e + '\u00a0', //nbsp
-        d.align = 'right',
-        d.style.lineHeight = '9px',
-        d.style.fontSize = '10px',
-        d.style.color = '#000',
-        d.classList.add('PPM2_Numeric_Grades_Bar')
-        ) : (
-        a.textContent = e,
-        a.style.color = '#000',
-        a.classList.add('PPM2_Numeric_Grades_Bar')
-    );
+    e = /(%{0,1}[\d]+%{0,1})/i.test(a.title) ? a.title.match(/(%{0,1}[\d]+%{0,1})/i)[1] : a.title;
+    if (d && d.style) {
+      d.textContent = e + '\u00a0'; // nbsp
+      d.align = 'right';
+      d.style.lineHeight = '9px';
+      d.style.fontSize = '10px';
+      d.style.color = '#000';
+      d.classList.add('PPM2_Numeric_Grades_Bar');
+    } else {
+      a.textContent = e;
+      a.style.color = '#000';
+      a.classList.add('PPM2_Numeric_Grades_Bar');
+    }
   }
 
   b = c.getElementsByClassName('plusMinusBar');
-  for (i = b.length; i-- ;) {
+  for (i = b.length; i--;) {
     a = b[i];
     // we've already scored this
     if (a.getElementsByClassName('PPM2_Numeric_Grades_PM_Bar').length > 0) {
@@ -168,14 +162,12 @@ function progressBars (c) {
     e = document.createElement('div');
     e.textContent = a.title.match(/(%{0,1}-*[\d]+%{0,1})/i)[1];
     e.className = 'PPM2_Numeric_Grades_PM_Bar';
-    if (0 < a.getElementsByClassName('neg').length) {
+    if (a.getElementsByClassName('neg').length > 0) {
       a.childNodes[0].firstChild.appendChild(e);
       a.getElementsByClassName('posholder')[0].style.cssFloat = 'none';
-    }
-    else if (0 < a.getElementsByClassName('pos').length) {
+    } else if (a.getElementsByClassName('pos').length > 0) {
       a.childNodes[1].firstChild.appendChild(e);
-    }
-    else {
+    } else {
       a.childNodes[1].firstChild.appendChild(e);
       a.childNodes[1].firstChild.style.width = '0%';
     }
@@ -262,9 +254,9 @@ function numericGrades (c) {
   for (var i = b.length; i--;) {
     var a = b[i];
     if (!a.classList.contains('PPM2_Numeric_Grades') && a.href.indexOf('Help/Scoring/') > -1) {
-      var e = a.href.match(/\/Help\/Scoring\/(\d+)/i)[1] - 1,
-      h = dict[selected][e],
-      j = document.createElement('span');
+      var e = a.href.match(/\/Help\/Scoring\/(\d+)/i)[1] - 1;
+      var h = dict[selected][e];
+      var j = document.createElement('span');
       j.style.color = h[1];
       j.style.backgroundColor = h[0];
       j.textContent = ' ' + e;
@@ -280,11 +272,11 @@ function initialize () {
   // start listening
   var Observer = window.MutationObserver || window.WebKitMutationObserver;
   var observer = new Observer(function (records) {
-    toArray(records).forEach(function (record) {
+    Array.from(records).forEach(function (record) {
       if (!record.addedNodes) {
         return;
       }
-      toArray(record.addedNodes).forEach(function (node) {
+      Array.from(record.addedNodes).forEach(function (node) {
         // skipping text elements
         if (!node.tagName) {
           return;
@@ -300,8 +292,7 @@ function executeActive (node, opts) {
   if (!opts) {
     if (!node || node.nodeType) {
       opts = options;
-    }
-    else {
+    } else {
       opts = node;
       node = undefined;
     }
@@ -313,12 +304,12 @@ function executeActive (node, opts) {
         if (settings.active) {
           numericGrades(node);
         }
-      break;
+        break;
       case 'progressBars':
         if (settings.active) {
           progressBars(node);
         }
-      break;
+        break;
     }
   });
 }
@@ -328,4 +319,3 @@ storage.get(function (syncOpts) {
   options = syncOpts;
   initialize();
 });
-
