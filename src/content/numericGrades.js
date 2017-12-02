@@ -312,6 +312,70 @@ function executeActive (node, opts) {
         break;
     }
   });
+  drawStars(node);
+}
+
+function drawStars (target) {
+  target = target || document.getElementById('ppm-wrapper') || document.querySelector('div.content');
+  if (!target || !target.tagName || !target.tagName === 'BODY') {
+    return;
+  }
+
+  let localeRatings = false;
+
+  Array
+    .from(document.querySelectorAll('span.sortkey'))
+    .filter(sortkey => {
+      return sortkey.nextElementSibling &&
+        sortkey.nextElementSibling.textContent.indexOf('drawStarCount') === 0;
+    })
+    .forEach(sortkey => {
+      if (sortkey.parentElement.querySelectorAll('div > img').length > 0) {
+        return;
+      }
+
+      const container = document.createElement('div');
+      const textContainer = sortkey.parentElement.querySelector('div');
+      container.title = textContainer.title;
+      textContainer.parentElement.removeChild(textContainer);
+
+      let keyValue = parseFloat(sortkey.textContent);
+      if (localeRatings || keyValue % 5 > 0) {
+        localeRatings = true;
+        // locales are still graded. stars are an illusion
+        keyValue = parseInt((keyValue - 2) * 2.5 / 5, 10) * 5;
+      }
+
+      let stars = [];
+      // full stars
+      stars = stars.concat(
+        Array.from(Array(parseInt(keyValue / 10, 10))).map(x => 1)
+      );
+      // halfStar
+      stars = stars.concat(
+        Array.from(Array(keyValue % 10 / 5)).map(x => 0.5)
+      );
+      // empty stars
+      stars = stars.concat(
+        Array.from(Array(Math.max(5 - stars.length, 0))).map(x => 0)
+      );
+      // now we have an array with length 5, eg [1, 1, 0.5, 0, 0]
+      stars.forEach(star => {
+        const img = document.createElement('img');
+        switch (star) {
+          case 1:
+            img.src = '/Static/Icons/TinyStar_Gold.png';
+            break;
+          case 0.5:
+            img.src = '/Static/Icons/TinyStar_White.png';
+            break;
+          default:
+            img.src = '/Static/Icons/TinyStar_Grey.png';
+        }
+        container.appendChild(img);
+      });
+      sortkey.parentElement.appendChild(container);
+    });
 }
 
 var storage = chrome.storage.sync || chrome.storage.local;
