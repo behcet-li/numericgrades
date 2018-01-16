@@ -12,7 +12,7 @@ var options = {
 // keeping track of chrome's focus
 var inFocus = true;
 chrome.windows.onFocusChanged.addListener(function (window) {
-  inFocus = (window === chrome.windows.WINDOW_ID_NONE ? false : true);
+  inFocus = (window === chrome.windows.WINDOW_ID_NONE);
 });
 
 // keeping track of last active ppm tab
@@ -122,7 +122,7 @@ function getNotifications (domain) {
       var notificationOptions = {
         type: 'basic',
         iconUrl: '/icons/red-128.png',
-        title: '',
+        title: 'Popmundo',
         message: title
       };
       if (messages.length > 0) {

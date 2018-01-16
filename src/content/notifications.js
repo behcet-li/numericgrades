@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         else {
           setBubble(lastNum);
         }
-      break;
+        break;
     }
   });
 });
@@ -52,7 +52,7 @@ function sendMessage (name, data) {
   chrome.runtime.sendMessage(message);
 }
 
-function initialize_notifications () {
+function initializeNotifications () {
   document.addEventListener('count', function (e) {
     var data = e.detail || {};
     var count = data.count;
@@ -84,5 +84,5 @@ function initialize_notifications () {
 var storage = chrome.storage.sync || chrome.storage.local;
 storage.get(function (syncOpts) {
   options = syncOpts;
-  initialize_notifications();
+  initializeNotifications();
 });
