@@ -1,4 +1,4 @@
-/* global chrome, $ */
+/* global chrome, fetch, Headers */
 'use strict';
 
 var ppmrgx = /^.*:\/\/[\d]+\.popmundo.com\//;
@@ -92,15 +92,45 @@ function runNotificationsCheck () {
   });
 }
 
+function popNotification (messages) {
+  var notificationOptions = {
+    type: 'basic',
+    iconUrl: '/icons/red-128.png',
+    title: ''
+  };
+
+  messages = messages.map(function (message) {
+    return {
+      // yes thats a capital t
+      title: message.Text,
+      message: ''
+    };
+  });
+
+  if (messages.length > 1) {
+    notificationOptions.type = 'list';
+    notificationOptions.items = messages;
+    notificationOptions.message = 'Popmundo';
+  } else {
+    notificationOptions.message = messages.pop().title;
+  }
+
+  chrome.notifications.create('ppm_ng', notificationOptions);
+}
+
 function getNotifications (domain) {
-  $.ajax({
-    type: 'POST',
-    contentType: 'application/json; charset=utf-8',
-    url: domain + '/WebServices/A/Open.asmx/GetMenuNotifications',
-    data: '{ "ts" : "' + new Date().getTime() + '" }',
-    dataType: 'json',
-    success: function (msg) {
-      var messages = $.parseJSON(msg.d);
+  fetch(domain + '/WebServices/A/Open.asmx/GetMenuNotifications', {
+    credentials: 'same-origin',
+    method: 'POST',
+    body: '{ "ts" : "' + new Date().getTime() + '" }',
+    headers: new Headers({
+      'Content-type': 'application/json; charset=utf-8'
+    })
+  })
+    .then(res => res.json())
+    .catch(err => console.error('GetMenuNotifications', err))
+    .then(data => {
+      let messages = JSON.parse(data.d);
       messages = messages.filter(function (message) {
         if (!message.UID) {
           return false;
@@ -111,27 +141,8 @@ function getNotifications (domain) {
         return;
       }
       markAsRead(messages);
-      messages = messages.map(function (message) {
-        return {
-          // yes thats a capital t
-          title: message.Text,
-          message: ''
-        };
-      });
-      var title = messages.pop().title;
-      var notificationOptions = {
-        type: 'basic',
-        iconUrl: '/icons/red-128.png',
-        title: 'Popmundo',
-        message: title
-      };
-      if (messages.length > 0) {
-        notificationOptions.type = 'list';
-        notificationOptions.items = messages;
-      }
-      chrome.notifications.create('ppm_ng', notificationOptions);
-    }
-  });
+      popNotification(messages);
+    });
 }
 
 chrome.notifications.onClicked.addListener(function (id) {
